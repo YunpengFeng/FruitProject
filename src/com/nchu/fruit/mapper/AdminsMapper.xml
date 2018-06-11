@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nchu.fruit.mapper.AdminsMapper">
+<select id="getAdmins" parameterType="String" resultType="Admins">
+	select * from admins where admin_id=#{0};
+</select> 
+
+<select id="getAdminsInfo"  parameterType="int" resultType="Admins">
+	select * from admins  where ( admin_name like "%"#{1}"%"  or admin_id   like "%"#{1}"%" ) and admin_role=1 limit #{0},10;
+</select>
+<select id="getAdminsInfoTatol"   resultType="int">
+	select count(*) from admins  where  ( admin_name like "%"#{1}"%"  or admin_id   like "%"#{1}"%" ) and admin_role=1 ;
+</select>
+
+
+<update id="updateInfo"  parameterType="Admins" >
+	update Admins set admin_name=#{admin_name},admin_pass=#{admin_pass} where admin_id=#{admin_id}
+</update>
+
+<update id="updateRole"  parameterType="String" >
+	update Admins set admin_register=#{1}, where admin_id=#{0}
+</update>
+	
+<insert id="addAdmins" parameterType="Admins" >
+	insert into admins (admin_id,admin_name,admin_pass) values(#{admin_id},#{admin_name},#{admin_pass});
+</insert>
+
+
+<update id="updateAdminRole"  parameterType="map" >
+		update Admins 
+	<choose>
+		<!--  批准-->
+		<when test="role==12">
+				set admin_register =1
+		</when>
+		<!--禁用  -->
+		<when test="role==11">
+			set admin_register =0
+		</when>
+	</choose>
+	 	where admin_id=#{id}
+</update>
+	
+		<!-- 删除 -->
+	<delete id="deleteAdmin" parameterType="String">
+		delete  from Admins where admin_id=#{id}
+	</delete>
+	
+	<select id="getUserCheck"  parameterType="map" resultType="Admins">
+		select * from admins  where 1=1 
+			<choose>
+			<!-- 11验证账号 ，12 验证用户名 -->
+					<when test="type==11">
+							 and admin_id=#{param}
+					</when>
+					<when test="type==12">
+							and admin_name=#{param}
+					</when>
+			</choose>
+</select>
+
+<update id="setMenuList"  parameterType="String" >
+	update  Admins set admin_list=#{1} where admin_id=#{0}
+</update>
+
+</mapper>

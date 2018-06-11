@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nchu.fruit.mapper.FruitImfoMapper">
+
+	<insert id="addImfo" useGeneratedKeys="true" keyProperty="id" parameterType="map">
+			 <selectKey keyProperty='id' resultType='int' order='AFTER'  >  
+       			 select LAST_INSERT_ID();  
+   			 </selectKey>  
+			insert fruitImfo (num, type,information,isshow,season ,addman) value(#{num},#{fruittype},#{content},#{isshow},#{season},#{addman})
+	</insert>
+	
+	<update id ="UpdateImfo" parameterType="map">
+			update fruitImfo  set num =#{num},type =#{fruittype},information=#{content},isshow=#{isshow},season=#{season},addman=#{addman} where id=${optype}
+	</update>
+	<select id="queryLastOne" resultType="int">
+			SELECT ID FROM fruitimfo ORDER BY ID DESC LIMIT 1
+	</select>
+						
+	<select id="queryByName" parameterType="int" resultType="FruitImfo">
+		select * from FruitImfo where  num =#{0}
+	</select>
+	<!-- /*
+	 * 有用户推荐喜欢，个人喜好浏览 历史推荐 2条
+	 * 没有登录用户则是评价和当前月份水果各加一条。
+	 * 根据当前月份  2 条 和下个月水果2条
+	 *  销售 量最高的水果前2
+	 *  评价最高的水果2条
+	 */ -->
+	<!-- 轮播页面的显示水果 一个是带用户 ，另外一个是不带用户的-->
+	<select id="getSlideImfo" parameterType="int" resultType="map">
+				(select count(*) t ,fruit_id from items GROUP BY fruit_id ORDER BY t DESC limit 3)
+				UNION all
+				(select num,type from fruitimfo where season = #{0}  and isshow =1 limit 1)
+				UNION all
+				(select num,type from fruitimfo where season = #{0}+1 and isshow =1 limit 1)
+				UNION  all
+				(select  count(fruit_id) t1,fruit_id from `comment` ,items
+				where items.item_id = comment.item_id  group by fruit_id ORDER BY t1 DESC,c_rank desc  limit 2)
+	</select>
+	
+	
+	<select id="_getSlideImfo" parameterType="int" resultType="map">
+				
+	</select>
+	
+	
+	<select id="getByType" parameterType="int" resultType="FruitImfo">
+				select * from FruitImfo where  num= #{0}
+	</select>
+	
+</mapper>

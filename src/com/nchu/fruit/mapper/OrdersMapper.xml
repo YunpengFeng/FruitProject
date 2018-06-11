@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nchu.fruit.mapper.OrdersMapper">
+<insert id="addOrder" parameterType="String">
+	insert into orders (orders_id,users_id,order_time,tempinfo) values(#{0},#{1},#{2},#{3})
+</insert>
+<update id="upadateOrders" parameterType="String">
+	update orders set phone=#{2} ,address=#{1}, man=#{3} ,total=#{4} ,pay_states=1,tempinfo=#{5} where orders_id=#{0};
+</update>
+
+<!--1 所有订单 2 代付款 5 待发货 3 待收货  -->
+<select id="getOrdersList" parameterType="map" resultType="Orders">
+		select * from  Orders  where 1=1
+		<choose>
+			<when test="type =='1'.toString()">
+					and 1=1
+			</when>
+			<when test="type=='2'.toString()">
+					and pay_states=0  and cancal_order = 0
+			</when>
+			
+			<when test="type=='5'.toString()">
+					and out_states=0 and  pay_states=1 and check_cancal_order = 0
+			</when>
+			
+			<when test="type=='3'.toString()">
+					and get_states=0 and  pay_states=1
+			</when>
+		</choose>
+		  and users_id=#{userid} order by  orders_id desc;
+</select>
+
+
+<select id="getOrderById" parameterType="String" resultType="Orders">
+		select * from  Orders where orders_id=#{0} 
+</select>
+
+<update id="updatStates" parameterType="map" >
+		update  Orders  
+		<choose>
+			<when test="type =='1'.toString()">
+					set get_states =1
+			</when>
+			<when test="type =='2'.toString()">
+					set out_states =1
+			</when>
+		</choose>
+		 where orders_id=#{userid}
+</update>
+
+
+
+	<!--批量之订单管理总量  》支付，发货 ，收货-->
+<select id="getTotalByMap" parameterType="map" resultType="int">
+		select count(*) from  Orders  where 1=1
+		<choose>
+			<when test="vals =='10'">
+					and pay_states =1
+			</when>
+			<when test="vals=='11'">
+					and pay_states=0
+			</when>
+			
+			<when test="vals=='12'">
+					and out_states=1 and  pay_states=1
+			</when>
+			
+			<when test="vals=='13'">
+					and out_states=0 and  pay_states=1 and  check_cancal_order = 0
+			</when>
+			
+			<when test="vals=='14'">
+					and get_states=1 and  pay_states=1 
+			</when>
+			<when test="vals=='15'">
+					and get_states=0 and  pay_states=1
+			</when>
+			<when test="vals=='16'">
+					and pay_states =1 and  cancal_order=1
+			</when>
+		</choose>
+		<if test="startdata!=null and  startdata!='' and enddata!=null and  enddata!=''">
+					and unix_timestamp(order_time) between unix_timestamp(#{startdata}) and unix_timestamp(#{enddata}) 
+		</if>
+	 <if test="scontent!=null and scontent!=''">
+				 and  (orders_id like "%"#{scontent}"%" )
+	 </if>
+</select>
+
+<select id="getInfoByMap" parameterType="map" resultType="map">
+		select orders_id,user_name,order_time,pay_states,out_states,get_states 
+		from  Orders,users  where 1=1 and users.users_id=orders.users_id
+		<choose>
+			<when test="vals =='10'">
+					and pay_states =1
+			</when>
+			<when test="vals=='11'">
+					and pay_states=0
+			</when>
+			
+			<when test="vals=='12'">
+					and out_states=1 and  pay_states=1
+			</when>
+			
+			<when test="vals=='13'">
+					and out_states=0 and  pay_states=1 and  check_cancal_order = 0
+			</when>
+			
+			<when test="vals=='14'">
+					and get_states=1 and  pay_states=1
+			</when>
+			<when test="vals=='15'">
+					and get_states=0 and  pay_states=1
+			</when>
+			<when test="vals=='16'">
+					and pay_states =1 and  cancal_order=1 and check_cancal_order = 0
+			</when>
+		</choose>
+		<if test="startdata!=null and  startdata!='' and enddata!=null and  enddata!=''">
+					and unix_timestamp(order_time) between unix_timestamp(#{startdata}) and unix_timestamp(#{enddata}) 
+		</if>
+	 <if test="scontent!=null and scontent!=''">
+				 and  (orders_id like "%"#{scontent}"%" )
+	 </if>
+		 order by  order_time desc  limit #{start} ,#{size};;
+</select>
+	
+	<update id="produce_yundao" parameterType="String">
+			update orders set out_states =1 ,express =#{0} where orders_id =#{1}
+	</update>
+	
+	<!-- 催单记录查询只查询为发货的 -->
+	<select id="getTotalByMapOfCuidan" parameterType="map" resultType="int">
+		select count(*) from  Orders  where 1=1 	and out_states=0 and  pay_states =1
+		<choose>
+			<!-- <when test="amounts ==''||amounts==null">
+			</when> -->
+			<when test="amounts=='1'.toString()">
+					and callNumber  &gt;=0 and callNumber &lt;=3
+			</when>
+			<when test="amounts=='2'.toString()">
+					and callNumber  &gt;=4 and callNumber &lt;=6
+			</when>
+			<when test="amounts=='3'.toString()">
+					and callNumber  &gt;=7 and callNumber &lt;=10
+			</when>
+		</choose>
+		<if test="startdata!=null and  startdata!='' and enddata!=null and  enddata!=''">
+					and unix_timestamp(order_time) between unix_timestamp(#{startdata}) and unix_timestamp(#{enddata}) 
+		</if>
+	 <if test="scontent!=null and scontent!=''">
+				 and  (orders_id like "%"#{scontent}"%" )
+	 </if>
+</select>
+
+<select id="getInfoByMapOfCuidan" parameterType="map" resultType="map">
+			select orders_id, users_id,callnumber,order_time from  Orders  where 1=1 	and out_states=0 and pay_states =1
+		<choose>
+			<when test="amounts=='1'.toString()">
+					and callNumber  &gt;=0 and callNumber &lt;=3
+			</when>
+			<when test="amounts=='2'.toString()">
+					and callNumber  &gt;=4 and callNumber &lt;=6
+			</when>
+			<when test="amounts=='3'.toString()">
+					and callNumber  &gt;=7 and callNumber &lt;=10
+			</when>
+		</choose>
+		<if test="startdata!=null and  startdata!='' and enddata!=null and  enddata!=''">
+					and unix_timestamp(order_time) between unix_timestamp(#{startdata}) and unix_timestamp(#{enddata}) 
+		</if>
+	 <if test="scontent!=null and scontent!=''">
+				 and  (orders_id like "%"#{scontent}"%" )
+	 </if>
+		 order by  callnumber desc  limit #{start} ,#{size};
+</select>
+	
+	<select id="getAmountSellByYear" parameterType="String" resultType="map">
+		select sum(total) sum ,MONTH(order_time) months,count(*) count   from orders
+		where pay_states=1  and YEAR(order_time)=#{year} GROUP BY MONTH(order_time)
+	</select>
+	
+	<!--订单成交量  -->
+	<select id="getOrdersSuccess" parameterType="String" resultType="map">
+		select count(*) count ,MONTH(order_time) months
+	 	from orders  where year(order_time)=#{year} GROUP BY MONTH(order_time);
+ 	</select>
+	
+	
+	<!--催单次数统计  -->
+	<select id="getOutOrders" parameterType="String" resultType="int">
+		select callnumber from Orders  where orders_id =#{orderid}
+	</select>
+	
+	<update  id="insertIntoOutOrder" parameterType="map" >
+		update Orders set  callnumber =#{callnumber} where orders_id =#{orderid}
+	</update>
+
+	<update  id="cancle_order" parameterType="map" >
+		update Orders  
+		<choose>
+			<when test ="type =='12'">
+				set cancal_order =1 
+			</when>
+			<when test ="type =='13'">
+				set cancal_order =0 
+			</when>
+			<when test ="type =='11' or  type =='14' ">
+				set cancal_order =1  ,check_cancal_order = 1 
+			</when>
+		</choose>
+		
+		where orders_id =#{orderid}
+	</update>
+</mapper>

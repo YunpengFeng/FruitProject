@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nchu.fruit.mapper.DirtyPoolMapper">
+	<select id="getAllPool" resultType="DirtyPool">
+		select * from DirtyPool 
+	</select>
+	
+	<select id="getLastDrity" resultType="DirtyPool">
+		select * from DirtyPool  order by id desc limit  1
+	</select>
+	
+	<insert id="InsertPool" parameterType="String">
+			insert  DirtyPool(content) value(#{0})
+	</insert> 
+	<delete id="deletePool" parameterType="String">
+		delete from DirtyPool  where  id=#{0}
+	</delete>
+	
+	<update id="updatePool" parameterType="String">
+		update DirtyPool set content =#{0} where id=#{1}
+	</update>
+	
+		
+	<select id="getAllPoolBySearch"  parameterType="map" resultType="DirtyPool">
+		select  * from DirtyPool  where  1= 1 
+		<if test="scontent != null and scontent != '' ">
+			 and content like "%"#{scontent}"%"
+		</if> 
+		limit #{start}, #{pageSize}
+	</select>
+	
+	<select id="getAllPoolBySearchTotol"  parameterType="map" resultType="int">
+		select  count(*) from DirtyPool  where  1= 1 
+		<if test="scontent != null and scontent != '' ">
+			 and content like "%"#{scontent}"%"
+		</if> 
+	</select>
+	
+	
+</mapper>

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nchu.fruit.mapper.ConversationMapper">
+
+	<insert id="addOneConversation" parameterType="Conversation">
+	<choose>
+		<when test= "sendid !=null  and  sendid !='' ">
+			insert into Conversation(sendid,sendtime,fruit_id,content) values(#{sendid},#{sendtime},#{fruit_id},#{content})
+		</when>
+		<when test= "receiveid !=null  and  receiveid !='' ">
+			insert into Conversation(receiveid,sendtime,fruit_id,content) values(#{receiveid},#{sendtime},#{fruit_id},#{content})
+		</when>
+	</choose>
+	</insert>
+	
+	<select id="getListConversation" parameterType="map" resultType="Conversation">
+			select * from Conversation where 1=1
+		<choose>
+				<when test="type=='one'">
+						and fruit_id=#{fruitid} and receiveid=#{userid} and isread=0 order by sendtime DESC LIMIT 1 
+				</when>
+				<when test="type=='five'">
+						and fruit_id=#{fruitid} and sendid=#{sendid} and isread=0 order by sendtime DESC LIMIT 1 
+				</when>
+				<when test="type=='two'">
+						and fruit_id=#{fruitid}  and sendid =#{userid} or receiveid = #{userid} order by sendtime limit 30
+				</when>
+			
+				<when test="type=='three'">
+						and fruit_id=#{fruitid}  and sendid =#{sendid} and isread=0 order by sendtime 
+				</when>
+				
+					<!-- 管理员查询历史记录 -->
+						<when test="type=='four'">
+						and fruit_id=#{fruitid}  and sendid =#{sendid} or receiveid = #{sendid} order by sendtime limit 30
+				</when>
+		</choose>
+		
+	</select>
+	
+	
+	<update id="updateReadState" parameterType="Integer">
+			update conversation set isread=1 where id=#{0}
+	</update> 
+	
+	
+	<select id="queryNoread" parameterType="map" resultType="map">
+			<choose>
+					<!-- 管理员未读信息列表-->
+				<when test="isread=='11'">
+						SELECT sendid,user_name,conversation.fruit_id,count(*) c,fruit_name  from conversation,users,fruits
+  						where isread =0  and users.users_id=conversation.sendid  and fruits.fruit_id=conversation.fruit_id 
+						GROUP BY sendid,conversation.fruit_id  ORDER BY c desc
+				</when>
+				
+				<when test="isread=='12'">
+				
+				</when>
+				
+		</choose>
+	
+	</select>
+
+</mapper>

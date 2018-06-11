@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nchu.fruit.mapper.ItemsMapper">
+
+<insert id="addItems" parameterType="map">
+	insert into items (orders_id,fruit_id,fruit_price ,fruit_name,amount,count) values (#{orderid},#{id},#{price},#{name},#{amount},#{sum})
+</insert>
+
+	<select id="getOrdersItems"  parameterType="String" resultType="Items">
+			select * from Items where orders_id  =#{0}
+	</select>
+	
+	<select id="getItemsList"  parameterType="String" resultType="Items">
+			select * from  items ,orders where com_states=0  and items.orders_id=orders.orders_id and users_id=#{0} and out_states =1 and get_states =1  ORDER BY items.orders_id DESC
+	</select>
+	
+	<update id="updateComStates" parameterType="String">
+		update items set com_states=1 where item_id=#{0}
+	</update>
+	
+		<!-- 年销售量前十 -->
+		<select id="countTopTenByYear"  parameterType="String" resultType="map">
+				select count(*) y ,items.fruit_id,fruits.fruit_name from items ,orders ,fruits
+				where  orders.orders_id=items.orders_id and year(order_time)=#{year} and 
+				items.fruit_id=fruits.fruit_id
+				 GROUP BY fruit_id ORDER BY y desc 
+		</select>
+	
+	<!--查询当前年月的销售量  -->
+	<select id="getMonthSell"  parameterType="int" resultType="int">
+			select count(*)  from 
+			(select orders_id from orders  
+			 where str_to_date(order_time, '%Y-%m') = str_to_date(sysdate(), '%Y-%m') ) t ,items i 
+			where i.orders_id = t.orders_id and fruit_id =#{0} 
+	</select>
+	
+	
+	<select id ="_recodementList"  parameterType="map" resultType="map">
+	 <choose>
+			<when test ="type=='11'">
+						select fruit_id, t  from (
+							(select fruit_id, count(*) t  from items GROUP BY fruit_id ORDER BY t DESC limit 3)
+							UNION 
+							(select  fruit_id ,count(fruit_id) t1 from `comment` ,items
+											where items.item_id = comment.item_id  group by fruit_id ORDER BY t1 DESC,c_rank desc)
+							UNION
+							(select fruit_id,fruit_amount  from fruits where  fruit_type in (select type from fruitimfo where season = season = #{month} ) limit 10)
+								UNION 
+							(select fruit_id,fruit_amount from fruits where  fruit_type in (select type from fruitimfo where season = season = #{month} +1 ) limit 10)
+							) t1 limit #{start} ,10 
+			</when>
+	</choose>
+	</select>
+
+</mapper>

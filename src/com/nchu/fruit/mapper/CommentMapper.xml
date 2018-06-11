@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nchu.fruit.mapper.CommentMapper">
+	<insert id="addDiscuss" parameterType="String">
+		insert into comment(item_id,users_id,
+		content,c_date,c_rank,c_images,c_imgcounts)
+		values(#{4},#{2},#{1},#{3},#{0},#{4},#{5})
+	</insert>
+	<insert id="addDiscuss1" parameterType="String">
+			insert into comment(item_id,users_id,
+			content,c_date,c_rank,c_images,c_imgcounts,c_states,p_states)
+			values(#{4},#{2},#{1},#{3},#{0},#{4},#{5},#{6},#{7})
+		</insert>
+	<select id="getDicussByFruit" parameterType="String" resultType="map">
+		SELECT fruit_id, user_name,fruit_name
+		,content,comment.item_id,amount,c_date,c_rank,c_images,c_imgcounts
+		from users,comment,items
+		where items.item_id =comment.item_id and fruit_id=#{0} and p_states=1 and
+		users.users_id=comment.users_id
+	</select>
+
+
+	<select id="getTotalByMap" parameterType="map" resultType="int">
+		<choose>
+			<!--评价总量查询 -->
+			<when test="type=='24'">
+				select count(*) from comment where 1=1
+				<if test="state!=null  and state!=''">
+									<choose>
+									<when test="state=='10'">
+										and c_states = 1
+									</when>
+									<when test="state=='11'">
+										and c_states =0
+									</when>
+									<when test="state=='12'">
+										and p_states = 1
+									</when>
+									<when test="state=='13'">
+										and p_states = 0 and  c_states = 1 
+									</when>
+								</choose>
+				</if>
+				<if test="xing!=null and  xing!=''">
+					and c_rank = #{xing}
+				</if>
+				<if test="startdata!=null and  startdata!='' and enddata!=null and  enddata!=''">
+					and unix_timestamp(c_date) between unix_timestamp(#{startdata})
+					and unix_timestamp(#{enddata})
+				</if>
+				<if test="scontent!=null and scontent!=''">
+					and (users_id =#{scontent} or item_id=#{scontent})
+				</if>
+			</when>
+		</choose>
+	</select>
+	
+   <select id="getInfoByMap" parameterType="map" resultType="map">
+				<choose>
+				<!-- 评论查询 -->
+					<when test="type=='24'">
+							select *  from comment where 1=1
+							<if test="state!=null  and state!=''">
+								<choose>
+									<when test="state=='10'">
+										and c_states = 1
+									</when>
+									<when test="state=='11'">
+										and c_states =0
+									</when>
+									<when test="state=='12'">
+										and p_states = 1
+									</when>
+									<when test="state=='13'">
+										and c_states = 1 and p_states = 0
+									</when>
+								</choose>
+							</if>
+							<if test="xing!=null and  xing!=''">
+								and c_rank = #{xing}
+							</if>
+							<if test="startdata!=null and  startdata!='' and enddata!=null and  enddata!=''">
+									and unix_timestamp(c_date) between unix_timestamp(#{startdata})
+									and unix_timestamp(#{enddata})
+							</if>
+							<if test="scontent!=null and scontent!=''">
+								and (users_id =#{scontent} or item_id=#{scontent}) 
+							</if>
+							limit #{start} ,#{size};
+					</when>
+				
+			</choose>
+		</select>
+		<!--修改评论状态  11.发布; 13 不发布(只要是发布审核状态一定为1，通过了审核)  12审核-->
+		 <update id="updatecomment_states" parameterType="map" >
+		 		update  comment set c_states=1
+ 		 		<choose>
+		 				<when test="type=='11'">
+		 						,p_states=1
+		 				</when>
+		 				<when test="type=='13'">
+		 						,p_states=0
+		 				</when>
+		 				<!-- <when test="type=='12'">
+		 						
+		 				</when> -->
+		 		</choose>
+		 		where  item_id=#{a}
+		 </update>
+		
+
+</mapper>

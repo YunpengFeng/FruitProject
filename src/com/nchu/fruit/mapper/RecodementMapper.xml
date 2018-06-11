@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nchu.fruit.mapper.RecodementMapper">
+	
+	<select id="queryByUserId" parameterType="String" resultType="Recodement"> 
+		select * from Recodement where  fruit_id = #{0} and  userid = #{1}
+	</select>
+	
+	<insert id ="addOneRecodement" parameterType="String" >
+		insert Recodement  (userid,fruit_id) value(#{1},#{0})
+	</insert>
+	
+	<update id ="updateLookNumRecodement" parameterType="int">
+		update Recodement set looknum = looknum+1 where  id= #{0}
+	</update>
+
+
+	<!-- 推荐表 11 表示 的是没有用户登入 推荐的数据 ；22表示有用户    对应的参数月份，登录人员,起始值 ，type-->
+	<select id ="recodementList"  parameterType="map" resultType="map">
+		<choose>
+			
+			<when test ="type=='12'">
+					<!-- 浏览记录 ， 购物车 ，收藏夹 ，旺季水果    对应的参数月份，登录人员,起始值 ，type-->
+					select fruit_id,looknum from 
+					((select fruit_id,looknum from recodement   where userid =1 order by looknum desc)
+						UNION  
+						(select fruit_id ,users_id from collections where  users_id = #{userid})
+						UNION  
+						(select c.users_id,c.fruit__id from cars  c where  c.users_id = #{userid})
+						UNION  
+						(select fruit_id,fruit_amount  from fruits where  fruit_type in (select type from fruitimfo where season = #{month} ))
+						UNION 
+						(select fruit_amount,fruit_id from fruits where  fruit_type in (select type from fruitimfo where season = #{month}+1 ))
+					) t  limit #{start} ,10 
+			</when>
+		</choose>
+	</select>
+	
+	
+</mapper>

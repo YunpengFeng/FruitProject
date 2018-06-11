@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nchu.fruit.mapper.FruitsMapper">
+
+	<select id="getList" resultType="Fruits">
+		select * from fruits order by istop desc ,fruit_id  desc  limit 14;
+	</select>
+
+	<select id="getType" resultType="String">
+		select distinct fruit_type from fruits ;
+	</select>
+
+	<select id="getJinKou" resultType="Fruits">
+		select * from fruits where fruit_place like 'f%'   ORDER BY istop desc ,fruit_id  limit 6 ;
+	</select>
+		
+		<!-- 保质期少于70天的放在折扣水果里头 -->
+		<select id="getZheKou" resultType="map">
+			select fruit_id, fruit_name  ,fruit_sellprice ,fruit_price  from fruits 
+			where fruit_date-datediff(curdate(),str_to_date(fruit_time, '%Y-%m-%d')) &lt;70 
+			 and  fruit_date-datediff(curdate(),str_to_date(fruit_time, '%Y-%m-%d')) &gt; 1 
+			 order by istop desc ,fruit_id  limit 6
+		</select>
+	
+	<select id="getMoreList" parameterType="map" resultType="Fruits">
+		select * from fruits where 1 = 1
+		<choose>
+			<when test="type ==1">
+				order by istop desc ,fruit_id limit #{page} ,14;
+			</when>
+			<when test="type ==3">
+				and fruit_place like 'f%' order by istop desc ,fruit_id limit #{page} ,14 ;
+			</when>
+			 <when test="type==2">
+				and fruit_date-datediff(curdate(),str_to_date(fruit_time, '%Y-%m-%d')) &lt;70 
+			 	and  fruit_date-datediff(curdate(),str_to_date(fruit_time, '%Y-%m-%d')) &gt; 1
+			 	order by istop desc ,fruit_id  limit #{page},14
+			  </when> 
+
+		</choose>
+	</select>
+	
+		<select id="getSearchContent" parameterType="String" resultType="String">
+					select fruit_name from fruits where  1 = 1
+					<choose>
+						<when test="#{0}==null and #{0}==''">
+							and fruit_name ='西瓜' ;
+						</when>
+						<when test="#{0} !=null">
+							and fruit_name like "%"#{0}"%" limit 8 ;
+						</when>
+					</choose>
+		</select>
+		
+		<select id="getTotal" parameterType="String" resultType="int">
+					select count(*) from fruits
+					<choose>
+						<when test="#{0}==null and #{0}==''">
+							where fruit_name ='西瓜' ;
+						</when>
+						<when test="#{0} !=null and #{0}!=''" >
+							where fruit_name like "%"#{0}"%" or fruit_id like "%"#{0}"%" or fruit_place like "%"#{0}"%" ;
+						</when>
+					</choose>
+		</select>
+		
+		<select id="getSearchList" parameterType="String" resultType="Fruits">
+			select * from fruits where fruit_name like "%"#{1}"%" or fruit_id like "%"#{1}"%" or fruit_place like "%"#{1}"%" 
+			ORDER BY istop desc ,fruit_id 
+			 limit #{0}  ,14;
+		</select>
+		
+		<select id="getTypeTotal" parameterType="String" resultType="int">
+				select count(*) from fruits where fruit_type=#{0}
+		</select>
+		
+		<select id="getTypeList" parameterType="String" resultType="Fruits">
+			select * from fruits where fruit_type = #{1}  ORDER BY istop desc ,fruit_id limit #{0}  ,14;
+		</select>
+		
+		<select id="getById" parameterType="int" resultType="Fruits">
+			select * from fruits where fruit_id = #{0}  
+		</select>
+		
+		<update id="subAmount" parameterType="String">
+				update fruits set fruit_amount=#{1} where fruit_id=#{0}
+		</update>
+		<!--退单增加库存数量  -->
+		<update id="cancelsubAmount" parameterType="int">
+				update fruits set fruit_amount=fruit_amount+#{1} where fruit_id=#{0}
+		</update>
+		<update id="updateFruit_states" parameterType="int">
+				update fruits
+				<choose>
+					<when test="type=='0'.toString()">
+				 			set fruit_states=1 where fruit_id=#{a}
+				 	</when>
+				 	<when test="type==11">
+				 			set fruit_states=0 where fruit_id=#{a}
+				 	</when>
+				 </choose>
+		</update>
+		
+
+	<select id="getTotalByMap" parameterType="map" resultType="int">
+
+		<choose>
+			<!-- 水果库存总量查询之库存 -->
+			<when test="type=='16'">
+				select count(*) from fruits where 1=1
+				<if test="amount!=null and  amount!=''">
+					and fruit_amount &lt;= #{amount}
+				</if>
+				<if test="scontent!=null and scontent!=''">
+					and (fruit_name like "%"#{scontent}"%" or fruit_id like
+					"%"#{scontent}"%" or fruit_place like "%"#{scontent}"%")
+				</if>
+			</when>
+
+			<!-- 水果库存总量查询之上下架 -->
+			<when test="type=='18'">
+				select count(*) from fruits where 1=1
+				<choose>
+					<!--上架 -->
+					<when test="values=='00'">
+						and fruit_states=0
+					</when>
+					<!--下架 -->
+					<when test="values=='11'">
+						and fruit_states=1
+					</when>
+				</choose>
+				<if
+					test="startdata!=null and  startdata!='' and enddata!=null and  enddata!=''">
+					and unix_timestamp(fruit_time) between unix_timestamp(#{startdata})
+					and unix_timestamp(#{enddata})
+				</if>
+				<if test="scontent!=null and scontent!=''">
+					and (fruit_name like "%"#{scontent}"%" or fruit_id like
+					"%"#{scontent}"%" or fruit_place like "%"#{scontent}"%")
+				</if>
+
+			</when>
+
+		</choose>
+	</select>
+			
+			<select id="getInfoByMap" parameterType="map" resultType="map">
+				<choose>
+				<!-- 水果库存查询 -->
+					<when test="type=='16'">
+							select fruit_id,fruit_name ,fruit_amount  from fruits where 1=1
+							<if test="amount!=null  and amount!=''">
+								and fruit_amount &lt;= #{amount}
+							</if>
+							<if test="scontent!=null and scontent!=''">
+								and  (fruit_name like "%"#{scontent}"%" or fruit_id like "%"#{scontent}"%" or fruit_place like "%"#{scontent}"%") 
+							</if>
+							limit #{start} ,#{size};
+					</when>
+						
+				<!-- 水果查询之上下架-->
+				<when test="type=='18'">
+					select fruit_id,fruit_name ,fruit_date,fruit_time  from fruits where 1=1
+						<choose>
+								<!--上架  -->
+								<when test="values=='00'">
+										and fruit_states=0
+								</when>
+									<!--下架  -->
+								<when test="values=='11'">
+										and fruit_states=1
+								</when>
+						</choose>
+						<if test="startdata!=null and  startdata!='' and enddata!=null and  enddata!=''">
+								and unix_timestamp(fruit_time) between unix_timestamp(#{startdata}) and unix_timestamp(#{enddata}) 
+						</if>
+						<if test="scontent!=null and scontent!=''">
+								and  (fruit_name like "%"#{scontent}"%" or fruit_id like "%"#{scontent}"%" or fruit_place like "%"#{scontent}"%")
+						</if>
+						limit #{start} ,#{size};
+				</when>
+			</choose>
+		</select>
+		
+		
+		<select id="queryLastId" resultType="int">
+				select max(fruit_id)  from fruits
+		</select>
+		<!--吐血太长了  -->
+		<insert id="addFruit" parameterType="Fruits">
+			insert into fruits(fruit_name,fruit_sellprice,fruit_price,fruit_place,fruit_images,fruit_imgcount,fruit_amount,fruit_states,fruit_info,fruit_date,fruit_time,fruit_type,fruit_enterprice,addman)
+			 values(#{fruit_name},#{fruit_sellprice},#{fruit_price},#{fruit_place},#{fruit_images},#{fruit_imgcount},#{fruit_amount},#{fruit_states},#{fruit_info},#{fruit_date},#{fruit_time},#{fruit_type},#{fruit_enterprice},#{addman});
+		</insert>
+		<update id="updatefruitByid" parameterType="Fruits">
+			update fruits set fruit_name = #{fruit_name},fruit_sellprice= #{fruit_sellprice},fruit_amount=#{fruit_amount},
+			fruit_date= #{fruit_date},fruit_info =#{fruit_info},fruit_place=#{fruit_place},fruit_price=#{fruit_price},
+			fruit_time=#{fruit_time}
+			where fruit_id =#{fruit_id}
+		</update>
+		
+		<update id="SetFruitTop" parameterType="String">
+			update fruits set istop = #{0} where  fruit_id =#{1}
+		</update>
+</mapper>

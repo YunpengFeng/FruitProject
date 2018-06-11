@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nchu.fruit.mapper.CarsMapper">
+
+	<select id="getCarById" parameterType="String" resultType="Cars">
+	   	  select * from cars where users_id=#{1} and fruit__id=#{0};
+	</select>
+	
+	<select id="getMapList" parameterType="String" resultType="map">
+	   	 select cars.fruit__id  id, fruit_name name,fruit_sellprice price, cars.amount amount from  fruits,cars 
+			where users_id=#{users_id} and fruits.fruit_id = cars.fruit__id limit 5;
+	</select>
+	
+	<select id="getMapListCarAll" parameterType="String" resultType="map">
+			 select cars.fruit__id  id, fruit_name name,fruit_sellprice price ,fruit_price p, cars.amount amount from  fruits,cars 
+			where users_id=#{users_id} and fruits.fruit_id = cars.fruit__id ;	
+	</select>
+	
+	<insert id="insertCar" parameterType="Cars" >
+			insert cars (users_id,fruit__id,amount) values(#{users_id},#{fruit_id},#{amount})
+	</insert>
+	
+	<update id="updateAmout" parameterType="Cars" >
+			update cars set amount =#{amount} where users_id=#{users_id} and fruit__id=#{fruit_id}
+	</update>
+	
+	<delete id="deleteCar" parameterType="String">
+			delete from cars where users_id=#{0} and fruit__id=#{1}
+	</delete>
+	
+	
+	
+	
+
+</mapper>

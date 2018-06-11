@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nchu.fruit.mapper.CollectionsMapper">
+	<!-- 查询所有的收藏夹 -->
+	<select id="getAllCollections" parameterType="String" resultType="map">
+		select c.fruit_id,fruit_place,fruit_info
+		 from Collections c,fruits f  
+		where users_id = #{0}  and c.fruit_id=f.fruit_id
+	</select>
+	
+	<select id="getRepate" parameterType="String" resultType="Collections">
+			select * from Collections where users_id =#{1} and fruit_id=#{0}
+	</select>
+
+	<insert id="insertCollections" parameterType="String">
+			insert into Collections(users_id,fruit_id,c_time)  values(#{1},#{0},#{2})
+	</insert>
+	
+	<delete id="delCollections" parameterType="String">
+			delete from Collections where users_id =#{1} and fruit_id=#{0}
+	</delete>
+
+
+</mapper>

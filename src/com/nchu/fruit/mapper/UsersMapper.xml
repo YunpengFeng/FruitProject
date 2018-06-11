@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nchu.fruit.mapper.UsersMapper">
+
+	<select id="query" parameterType="String" resultType="Users">
+		Select * from users  where  users_id =#{0} and user_pass=#{1}
+	</select>
+	
+	<select id="queryById" parameterType="String" resultType="Users">
+		select * from users where users_id=#{0}
+	</select>
+	
+	<select id="getUsersInfo"  parameterType="int" resultType="Users">
+		select * from Users  where user_name like "%"#{1}"%"  or users_id   like "%"#{1}"%"   limit #{0},20;
+	</select>
+	<select id="getUsersInfoTatol"   resultType="int">
+		select count(*) from Users  where user_name like "%"#{1}"%"  or users_id   like "%"#{1}"%" ;
+	</select>
+
+
+<update id="updateUserRole"  parameterType="map" >
+		update Users 
+	<choose>
+		<!--  批准-->
+		<when test="role==12">
+				set ban_states =0
+		</when>
+		<!--禁用  -->
+		<when test="role==11">
+			set ban_states =1
+		</when>
+	</choose>
+	 	where users_id=#{id}
+</update>
+	
+	<select id="getUserCheck" parameterType="map" resultType="Users">
+		select * from users
+		<choose>
+			<when test="type==11">
+				where users_id=#{param}
+			</when>
+			
+			<when test="type==12">
+				where user_name=#{param}
+			</when>
+			
+			<when test="type==13">
+				where users_id=#{userid} and user_pass =#{pass}
+			</when>
+			
+		</choose>
+	</select>
+	
+	<insert id="addUsers" parameterType="Users">
+	insert into Users (user_name,user_address,user_pass,user_phone,users_id,user_time) 
+	values(#{user_name},#{user_address},#{user_pass},#{user_phone},#{users_id},#{user_time});
+	</insert>
+	
+	<!-- 修改用户信息 -->
+	<update id="updateInfoUser" parameterType="Users">
+				update users set user_pass=#{user_pass} ,user_address =#{user_address} , user_phone=#{user_phone} 
+				where users_id =#{users_id}
+	</update>
+	<update id="updateMoney" parameterType="map">
+			update users set money  = ${money}+money where users_id =#{userid}
+	</update>
+	
+	<update id="cutMoney" parameterType="map">
+			update users set money  =${money} where users_id =#{userid}
+	</update>
+	
+</mapper>
