@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+	a{
+		text-decoration: none;
+		text-transform: capitalize;
+		color:red;
+		font-family: cursive;
+	}
+	a:hover{
+		color:green;
+	}
+</style>
+<link rel="stylesheet" type="text/css" href="js/themes/default/easyui.css">
+	<link rel="stylesheet" type="text/css" href="js/themes/icon.css">
+	<link rel="stylesheet" type="text/css" href="js/demo.css">
+	<script type="text/javascript" src="js/jquery.min.js"></script>
+	<script type="text/javascript" src="js/jquery.easyui.min.js"></script>
+	<script type="text/javascript" src="js/locale/easyui-lang-zh_CN.js"></script>
+<meta charset="UTF-8">
+<title>树形菜单</title>
+</head>
+<body>
+  <div class="easyui-layout" style="width:800px;height:400px;">
+		<div region="west" split="false" title="菜单栏" style="width:200px;height:auto;">
+			<ul class="easyui-tree" >
+        <li>
+            <span>xml映射</span>
+            <ul>
+                <li>
+                    <span>xml进行工作</span>
+                    <ul>
+                        <li><span><a href ="javascript:void(0)" onclick="showcontent('f1')">File 11</a></span></li>
+                        <li><span><a href ="javascript:void(0)" onclick="showcontent('f2')">指定同时映射xml文件和类</a></span></li>
+                        <li><span><a href ="javascript:void(0)" onclick="showcontent('f3')">只定义xml映射</a></span></li>
+                    </ul>
+                </li>
+                <li><span>xml映射数据源</span></li>
+                <li><span>操作xml数据</span></li>
+            </ul>
+        </li>
+        <li>
+        <span>File21</span>
+         <ul>
+                        <li><span>File 11</span></li>
+                        <li><span>指定同时映射xml文件和类</span></li>
+                        <li><span>只定义xml映射</span></li>
+             </ul>
+        </li>
+    </ul>
+		</div>
+		<div id="content" region="center" title="显示的内容" style="padding:10px;">
+		
+		</div>
+	</div>
+  ----------------------------*************************-------------------
+    <div style="margin-top:10px">
+    
+		<div style="float:left;display: block;">
+			<div class="easyui-layout" style="width: 800px; height: 400px;">
+				<div region="west" split="false" title="菜单栏"
+					style="width: 200px; height: auto;">
+					<ul class="easyui-tree">
+						<li><span>xml映射</span>
+							<ul>
+								<li><span>xml进行工作</span>
+									<ul>
+										<li><span><a href="javascript:void(0)"
+												onclick="addTab('f1','ssssssssssssss' )">File 11</a></span></li>
+										<li><span><a href="javascript:void(0)"
+												onclick="addTab('f2' ,'dddddddddd' )">指定同时映射xml文件和类</a></span></li>
+										<li><span><a href="javascript:void(0)"
+												onclick="addTab('f3' , 'cccccccccccc' )">只定义xml映射</a></span></li>
+									</ul></li>
+								<li><span>xml映射数据源</span></li>
+								<li><span>操作xml数据</span></li>
+							</ul></li>
+						<li><span>File21</span>
+							<ul>
+								<li><span>File 11</span></li>
+								<li><span>指定同时映射xml文件和类</span></li>
+								<li><span>只定义xml映射</span></li>
+							</ul></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+
+
+		<div style="float:left;margin-left:200px;margin-top:-400px;display: block;">
+			<div id="tt" class="easyui-tabs" style="width: 500px; height: 400px;">
+				<div title="首页" id="home"></div>
+				
+			</div>
+		</div>
+
+
+	</div>
+	
+	
+	<a href="javascript:void(0)" onclick="login()">登录</a>
+
+	<div id="win" class="easyui-window" closed="true" title="登入页面"
+		style="width: auto; height: auto; padding: 5px;">
+		<div style="margin: 0px 0;"></div>
+		<div class="easyui-panel" style="width: 500px">
+			<div style="padding: 10px 60px 20px 60px">
+				<form id="ff" method="post">
+					<table cellpadding="5">
+						<tr>
+							<td>账号:</td>
+							<td><input class="easyui-textbox" type="text" id="account"
+								data-options="required:true"></input></td>
+						</tr>
+						<tr>
+							<td>密码:</td>
+							<td><input class="easyui-textbox" type="text" id="password"
+								data-options="required:true,validType:'password'"></input> <span
+								id="passcheck" style="color: red"></span></td>
+						</tr>
+					</table>
+				</form>
+				<div style="text-align: center; margin-left: -200px; padding: 5px">
+					<a href="javascript:void(0)" class="easyui-linkbutton" id="login"
+						onclick="submitForm()">登入</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					<a href="javascript:void(0)" class="easyui-linkbutton"
+						onclick="clearForm()">重置</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a
+						href="javascript:void(0)" class="easyui-linkbutton"
+						onclick="toRegister()">注册</a>&nbsp;&nbsp;
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<a href="showusers">分页，富文本编辑器</a>
+
+
+
+
+</body>
+<script>
+$(document).ready(function(event){
+	$.ajax({
+		method:'post',
+		url:'homedata',
+		datatype:'json',
+		success:function(e){
+			
+			var data =eval("("+e+")");
+			var string ="<table border='1' style='width:400px ;text-align:center'><tr><td>name</td><td>phone</td><td>address</td></tr>"
+			for( var i  in data ){
+				string +="<tr><td>"+data[i].name+"</td><td>"+data[i].phone+"</td><td>"+data[i].address+"</td></tr>"
+			}
+			string +="</table>"
+			//alert("string"+string);
+			$("#home").html(string);
+		}
+	})	
+	
+	clearForm=function(){
+		$("#ff").form('clear');
+	}
+	
+	 toRegister= function(){
+	//	window.open("/WEB-INF/Jsp/behindJsp/register.html");
+		window.location.href="toRegister";
+		//document.location.reload(true);
+	}
+ submitForm= function(){
+		var account =$("#account").val();
+		var pass =$("#password").val();
+		$("#password").keydown(
+				function(){
+					$("#passcheck").hide();
+				}
+		);
+			
+		
+		$.ajax({
+			method: 'post',
+			url :'login',
+			data:{'account':account,'pass':pass},
+			datatype:'json',
+		
+			beforeSend :function(){
+				
+				$.messager.progress({title:'用户登入',msg:'正在登入中,请稍后!',text:'数据加载中'});
+				// 禁用按钮防止重复提交
+				$("#login").attr("disabled","true");
+				
+				},
+			
+				complete :function(){
+					
+					$.messager.progress("close");
+					$("#login").attr("disabled","false");
+				},
+			
+			success :function(a){
+			
+			  var s = eval("("+ a + ")");
+				//alert(s.meg);
+				if(s.meg == 'error'){
+					$("#passcheck").text("密码错误，请重新输入!");
+					$("#password").focus();
+					
+				}
+			},
+			error : function() {
+				alert("服务器异常，请求失败");
+			}
+		
+	});
+ }
+		
+});
+
+		function login(){
+			alert("sss");
+			$("#win").window('open');
+			//$("#win").css('z-index':100);
+		}
+		
+	function addTab(title, con) {
+		if ($('#tt').tabs('exists', title)) {
+			$('#tt').tabs('select', title);
+		} else {
+			//var content = '<iframe scrolling="auto" frameborder="0"  src="'+url+'" style="width:100%;height:100%;"></iframe>';
+			$('#tt').tabs('add', {
+				title : title,
+				content : con,
+				closable : true
+			});
+		}
+	}
+
+	showcontent = function(obj) {
+		if (obj == 'f1') {
+			$("#content").html("sssssssssssss");
+		}
+		if (obj == 'f2') {
+			$("#content").text("aaaaaaaaaaaaaaaa");
+		}
+		if (obj == 'f3') {
+			$("#content").html("cccccccccccccccc");
+		}
+	}
+</script>
+</html>

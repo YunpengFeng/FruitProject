@@ -1,0 +1,50 @@
+*{
+    margin: 0px;
+    border: 0px;
+}
+.c{
+    clear: both;
+}
+/*ҳ����ʾ����*/
+.inner {
+    width: 1300px;
+    margin: 0 auto;
+    /*background-color: red;*/
+}
+
+.footer{
+    margin-top: 0px;
+    height: auto;
+    padding:57px 0 57px 0;
+}
+
+.footer .nav ul {
+    position: absolute;
+    left:103px;
+    list-style: none;
+    color: gray;
+}
+.footer .nav ul li {
+    float: left;
+    width: 100px;
+    border-right: 1px solid gray;
+}
+
+.footer .nav ul li a {
+    display: block;
+    width: 100px;
+    color: gray;
+    text-align: center;
+    text-decoration: none;
+    font-family: ΢���ź�;
+    font-size: 16px;
+}
+
+.footer p{
+    padding-top: 40px;
+    text-align: center;
+    font-family: ΢���ź�;
+    font-size: 16px;
+    color: gray;
+}
+

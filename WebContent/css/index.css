@@ -1,0 +1,455 @@
+*{
+    margin:0px;
+    border:0px;
+}
+/*ҳ�����*/
+.inner{
+    width: 1300px;
+    margin:0 auto;
+}
+
+
+.c{
+    clear: both;
+}
+
+.total{
+    float: left;
+    margin-left: 69px;
+}
+.total1{
+    float: left;
+    margin-left: 16px;
+}
+/*ͷ��*/
+.head{
+    height: 25px;
+    background-color: #f5f5f5;
+}
+
+strong.em1{
+    color: gray;
+    font-family: cursive;
+    font-size: 17px;
+}
+
+a{
+    text-decoration: none;
+    color: black;
+}
+
+a:link{
+    color: black;
+}
+
+a:hover{
+    color: red;
+}
+
+/*a:visited{*/
+/*color: black;*/
+/*}*/
+
+.headright{
+    float: left;
+    margin-left: 230px;
+}
+
+.headight ul{
+    list-style: none;
+
+}
+
+.headright ul li{
+    float: left;
+    padding: 0px 11px;
+    display: block;
+    font-size: 15px;
+    border-right: 1px solid gray;
+    display: block;
+}
+
+.m{
+    margin-top:-18px;
+}
+
+img.img2{
+    float: left;
+    width:204px;
+    height:160px;
+
+}
+/*搜索框部分*/
+.s{
+    float:left;
+    margin-left: 150px;
+    width: 771px;
+    height: 38px;
+	display:inline;
+    position: relative;
+     margin-top: 49px
+}
+/*异步加载搜索部分  */
+.s .query{
+	position:absolute;
+	 margin-top: 44px;
+	 margin-left: 1.2%;
+     width: 372px;
+     height:auto;
+    border-radius: 2px;
+    text-align: left;
+    color:black;
+    font-family:cursive;
+    border: 1px solid white;
+    z-index:1;
+    background-color: white;
+}
+ul{
+	list-style: none;
+}
+.s  .query1 li{
+	width:auto;
+	 height:auto;
+	 text-align: left;
+	 margin-left:0px;
+	 font-size: 20px;
+	  /*��������*/
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    letter-spacing: -1px;
+}
+.s  .query1 li:HOVER{
+	
+	background:LightGray;
+	
+}
+.s .sear{
+	 width: 471px;
+    height: 55px;
+    position: absolute;
+    border-radius: 10px;
+    left:28px;
+    top: 0px;
+    background-color: #ff4400;
+    
+}
+.s .sear .search{
+	margin-top:5px;
+	 width: 372px;
+    height: 40px;
+    position: absolute;
+    text-align: center;
+    background-color:white;
+    left:6px;
+    top: 3px;
+}
+
+.s .sear .button1{
+	margin-top:5px;
+	 width: 62px;
+    height: 40px;
+    position: absolute;
+    text-align: center;
+    background-color:#ff4400;
+    right:20px;
+    top: 0px;
+     font-size: 20px;
+     
+}
+/*购物车*/
+.s .b{
+    width: 200px;
+    height: 40px;
+    border-radius: 5px;
+    border: 1px solid gray;
+    position: absolute;
+    left:550px;
+    background-color:wheat ;
+}
+.s .buycar{
+    width: 100px;
+    height: 38px;
+    text-align: center;
+    line-height: 35px;
+    color: red;
+    font-family: cursive;
+    font-size: 20px;
+    padding-left: 12px;
+    left:10px;
+    top: 0px;
+}
+
+
+.s img{
+    width: 58px;
+    height: 40px;
+    position: absolute;
+    left:142px;
+    top: 0px;
+}
+
+/*����*/
+.index{
+   float:left;
+    width:100%;
+    height: auto;
+    border-bottom: 1px solid gray;
+    background: white;
+    }
+
+.index p{
+    width:110px;
+    height: 36px;
+    padding-left:2px;
+    line-height:49px;
+    text-align: center;
+    margin-left: 0px;
+    color: black;
+    background-color: white;
+    font-family: cursive;
+    font-size: 25px;
+    font-weight: bold;
+    float:left
+}
+ .index a{
+ 	float:left;
+ 	border-bottom: 0px  dashed black;
+    margin-top: 15px;
+    width:auto;
+    height: 30px;
+    margin-left:17px;
+    color: black;
+    background-color: white;
+    font-family: cursive;
+    font-size: 23px;
+    font-weight: bold;
+    letter-spacing: 4px;
+      float:left
+ }
+ .index  a:HOVER{
+ 	color:red;
+ }
+ 
+ 
+/*��ͼƬ*/
+.img1{
+	margin-top:-5px;
+    float:left;
+     /* background: url("../imgs/timg.jpg") no-repeat; */
+    width: 100%;
+   height: 300px;
+    background-size: 1300px 300px;
+    background-color: white;
+   }
+
+
+/*  新品上市*/
+.new{
+    margin-top: 0px;
+    float:left;
+    width: 1300px;
+    height: auto;
+    margin-left: 0%;
+    border:0px solid gray;
+    background-color:white ;
+}
+
+
+.new p{
+	float:left;
+    margin-left: 16px;
+    margin-top:18px;
+    font-size:30px;
+    font-family: cursive;
+    font-weight: 900;
+    background-color: ghostwhite;
+}
+
+.new .more{
+		float:left;
+		margin-top:30px;
+		margin-left: 950px;
+}
+/*ÿ����ĸ���*/
+.new  .cell{
+    float:left;
+    margin-top: 15px;
+    /*margin-left: 16px;*/
+    background-color:white ;
+    width:180px;
+    height: 264px;
+    position: relative;
+    border-right: 1px solid ghostwhite;
+}
+.new  .cell img{
+    width: 110px;
+    height: 140px;
+    padding: 15px 54px  32px 42px ;
+    position:relative;
+}
+.new  .cell input{
+	 position:absolute;
+	 background-color:white;
+	 text-align:center;
+	 left:130px;
+	 top:159px;
+	 color:red;
+	 font-weight: 900;
+	 font-size: 30px;
+}
+
+
+.new  .cell  dd{
+    position:absolute;
+    top:181px;
+    font-family: cursive;
+    font-size: 20px;
+    font-weight: 300;
+    padding-left: 11px;
+}
+.new  .cell  dt{
+    position:absolute;
+    top:230px;
+    left:10px;
+    color: red;
+    padding-left: 11px;
+    font-family: fantasy;
+    font-size: 20px;
+    font-weight: 300;
+}
+.new  .cell del{
+    position:absolute;
+    left:103px;
+    top:235px;
+    /*padding-left: 50px;*/
+    color: gray;
+    font-family: fantasy;
+    ont-size: 14px;
+    font-weight: 300;
+}
+
+/* 折扣水果*/
+.count{
+    margin-top: 20px;
+    float:left;
+    width: 47%;
+    height: 650px;;
+    margin-left: 2%;
+    border:1px solid gray;
+    background-color:white ;
+    
+}
+
+
+
+.count p{
+	float:left;
+    margin-left: 26px;
+    margin-top:18px;
+    font-size:30px;
+    font-family: cursive;
+    font-weight: 900;
+    background-color: ghostwhite;
+}
+
+.count .more{
+		float:left;
+		margin-top:30px;
+		margin-left: 350px;
+}
+
+/*每个盒子*/
+.count  .cell{
+    float:left;
+    margin-top: 15px;
+    /*margin-left: 16px;*/
+    background-color:white ;
+    width:180px;
+    height: 264px;
+    position: relative;
+    border-right: 1px solid ghostwhite;
+}
+.count  .cell  img{
+	 
+	 
+    width: 110px;
+    height: 140px;
+    padding: 15px 54px  32px 42px ;
+}
+
+
+.count  .cell  dd{
+    position:absolute;
+    top:181px;
+    font-family: cursive;
+    font-size: 20px;
+    font-weight: 300;
+    padding-left: 11px;
+}
+.count  .cell  dt{
+    position:absolute;
+    top:230px;
+    left:10px;
+    color: red;
+    padding-left: 11px;
+    font-family: fantasy;
+    font-size: 20px;
+    font-weight: 300;
+}
+.count  .cell del{
+    position:absolute;
+    left:103px;
+    top:235px;
+    /*padding-left: 50px;*/
+    color: gray;
+    font-family: fantasy;
+    ont-size: 14px;
+    font-weight: 300;
+}
+/*分页*/
+.pagination{
+	margin-left:28%;
+	margin-top:100px;
+}
+
+.pagination ul{
+	list-style: none;
+}
+
+.pagination ul li{
+	width:65px;
+	height:40px;
+	border:1px solid blue;
+	border-radius:4px;
+	float:left;
+	position:relative;
+}
+.pagination ul li:HOVER{
+	background-color: LightGray;
+}
+.pagination ul li a{
+	font-family:cursive;
+	font-weight:800;
+	font-style:normal;
+	font-size:25px;
+	position:absolute;
+	top:8px;
+	left:24px;
+	color:black;
+}
+
+.recommend{
+	margin-left:10px;
+	width:100%;
+	height:101px;
+	
+}
+
+.recommend  img{
+	float:left;
+	margin-left:8px;
+	width:100px;
+	height:97px;
+}
+ 

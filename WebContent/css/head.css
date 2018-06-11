@@ -1,0 +1,151 @@
+*{
+    margin:0px;
+    border:0px;
+}
+/*ҳ�����*/
+.inner{
+    width: 1300px;
+    margin:0 auto;
+}
+
+
+.c{
+    clear: both;
+}
+
+.total{
+    float: left;
+    margin-left: 0px;
+}
+
+
+
+
+a{
+    text-decoration: none;
+    color: black;
+}
+
+a:link{
+    color: black;
+}
+
+a:hover{
+    color: red;
+}
+
+.head{
+	margin-top:10px;
+    height: 25px;
+    background-color: #f5f5f5;
+    
+}
+
+.head  .headleft{
+	 width:230px;
+	 height:25px;
+	   float: left;
+	  margin-left: 10px; 
+}
+
+.head .headleft  .em1{
+    color: gray;
+    font-family: cursive;
+    font-size: 17px;
+}
+
+
+.head  .headright{
+    float: left;
+   margin-left: 10px; 
+   magin-top:10px;
+}
+
+.head  .headight ul{
+    list-style: none;
+
+}
+
+ .head  .headright ul li{
+    float: left;
+    padding: 0px 10px;
+    display: block;
+    font-size: 15px;
+    border-right: 1px solid gray;
+}
+
+
+.m{
+    margin-top:-18px;
+}
+
+img.img2{
+    float: left;
+    width:204px;
+    height:160px;
+
+}
+/*�����򲿷�*/
+.s{
+    float:left;
+    margin-left: 28px;
+    width: 771px;
+    height: 38px;
+	display:inline;
+    position: relative;
+}
+
+/* .s .search{
+    width: 372px;
+    height: 38px;
+    border: 1px solid black;
+    position: absolute;
+    text-align: center;
+    left:0px;
+    top: 0px;
+
+} *//* 
+.s .button1{
+    width: 481px;
+    height: 43px;
+    text-align: center;
+    color: black;
+    font-family: cursive;
+    font-size: 20px;
+    position: absolute;
+    border: 1px solid gray;
+    left:20px;
+    top: 0px;
+    background-color: #ff4400;
+} */
+/*���ﳵ*/
+.s .b{
+    width: 200px;
+    height: 40px;
+    border-radius: 5px;
+    border: 1px solid gray;
+    position: absolute;
+    left:550px;
+    background-color:wheat ;
+}
+.s .buycar{
+    width: 100px;
+    height: 38px;
+    text-align: center;
+    line-height: 35px;
+    color: red;
+    font-family: cursive;
+    font-size: 20px;
+    padding-left: 12px;
+    left:10px;
+    top: 0px;
+}
+
+
+.s img{
+    width: 58px;
+    height: 40px;
+    position: absolute;
+    left:142px;
+    top: 0px;
+}

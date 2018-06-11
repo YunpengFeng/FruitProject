@@ -1,0 +1,207 @@
+@charset "UTF-8";
+*{
+    margin:0px;
+    border:0px;
+}
+/*居中*/
+.inner{
+    width: 1300px;
+    margin:0 auto;
+}
+
+/*  头部信息*/
+
+.top{
+	margin-top:40px;
+	width:100%;
+	height:40px;
+	background-color: white;
+	border-bottom:1px solid gray; 
+}
+
+.top .p1{
+	margin-left:20px;
+	float:left;
+	width:160px;
+	height:40px;
+	background-color: white;
+	font-family: cursive;
+	font-weight: 900;
+	color:red;
+	font-size: 25px;
+	font-style: normal;
+}
+
+.top .p2{
+	margin-left:370px;
+	float:left;
+	width:200px;
+	height:40px;
+	background-color: white;
+	font-family: inherit;
+	font-weight: 900;
+	color:red;
+	font-size: 18px;
+	font-style: normal;
+}
+.top .p2 a{
+	margin-left:10px;
+	width:100px;
+	background-color: gray;
+	color: white;
+	
+}
+/*操作信息*/
+.meddile {
+	margin-top:10px;
+	width:100%;
+	height:60px;
+	background-color: white;
+	border-bottom:1px solid gray; 
+}
+.meddile span{
+	margin-left:-70px;
+	margin-top:25px;
+	float:left;
+	display: inline;
+}
+.meddile .m{
+	margin-left:20px;
+	float:left;
+	width:160px;
+	height:40px;
+	background-color: white;
+	font-family: cursive;
+	font-weight: 900;
+	color:red;
+	font-size: 25px;
+	font-style: normal;
+	display: inline;
+}
+/*盒子*/
+.cell {
+	margin-top:10px;
+	width:100%;
+	height:80px;
+	background-color: white;
+	border-bottom: 1px solid gray; 
+}
+.cell .m{
+	margin-left:20px;
+	margin-top:20px;
+	float:left;
+	width:160px;
+	height:40px;
+	background-color: white;
+	font-family: serif;
+	font-weight: 600;
+	color:black;
+	font-size: 20px;
+	font-style: normal;
+	display: inline;
+}
+.cell  img{
+	float:left;
+	margin-left:-40px;
+	margin-top:0px;
+	width:80px;
+	height: 80px;
+}
+.cell .price{
+	margin-left:8px;
+	margin-top:20px;
+	float:left;
+}
+.cell .am{
+	float:left;
+	margin-left:-20px;
+}
+.cell .am .amout{
+	width:40px;
+	float:left;
+	margin-left:10px;
+	margin-top:40px;
+	background-color: orange;
+	text-align: center;
+}
+.cell .bm{
+	float:left;
+	margin-left:80px;
+}
+.cell .bm .move{
+	width:90px;
+	float:left;
+	margin-left:10px;
+	margin-top:40px;
+	background-color: orange;
+	text-align: center;
+}
+.cell .bm .amout{
+	width:40px;
+	float:left;
+	margin-left:8px;
+	margin-top:40px;
+	background-color: orange;
+	text-align: center;
+}
+
+input:HOVER{
+	color:red;
+}
+.cell .total{
+	width:60px;
+	float:left;
+	margin-left:70px;
+	margin-top:40px;
+	text-align: center;
+	border: 1px solid black;
+}
+
+.sum{
+	display: block;
+	float: left;
+	position: fixed;
+	background-color: orange;
+	margin-top: 10px;
+	z-index: 1;
+	height: 70px;
+	left: 109px;
+	bottom: 0px;
+	width: 1200px;
+}
+.sum .m{
+	margin-left:10px;
+	float:left;
+	width:160px;
+	 margin-top: 14px;
+	height:40px;
+	background-color: white;
+	font-family: serif;
+	font-weight: 600;
+	color:black;
+	font-size: 20px;
+	font-style: normal;
+	display: inline;
+}
+.sum span{
+	margin-left:-70px;
+	margin-top:25px;
+	float:left;
+	display: inline;
+}
+.sum p{
+	margin-top:15px;
+	float:left;
+	margin-left:590px;
+}
+.sum a{
+	float:left;
+	margin-left:50px;
+	margin-top:10px;
+	width:80px;
+	height:40px;
+	font-size:30px;
+	background-color: orange;
+	text-align: center;
+	color: #f40
+}

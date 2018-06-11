@@ -1,0 +1,165 @@
+.inner {
+	width: 1200px;
+	margin: 0 auto;
+}
+input{
+	margin-left:-5px;
+	height:30px;
+	font-weight: normal;
+	font-family: cursive;
+	padding: 0px;
+	font-size: 20px;
+}
+a {
+	text-decoration: none;
+}
+td{
+	height:30px;
+	font-size: 22px;
+	font-weight: normal;
+	font-family: cursive;
+	padding: 5px;
+	}
+.c{
+	clear:both;
+}
+b{
+	font-size: 20px;
+	font-family: cursive;
+	color:red;
+	font-style: normal;
+	padding: 0px;
+}
+ul {
+	list-style: none;
+	margin-left: 160px;
+}
+li{
+	float:left;
+	margin-top:10px;
+	margin-left: 10px;
+	width:25px;
+	height: 25px;
+	background-color: wihte;
+	border:1px solid black;
+	border-radius:5px;
+	color:green;
+	font-size: 20px;
+	font-family: cursive;
+	text-align: center;
+}
+
+.r{
+	margin-top:-878px;
+	margin-left:220px;
+	float:left;
+	width:80%;
+	height:600px;
+	/* background-color: gray; */
+}
+
+.r .content{
+		margin-top:30px;
+		margin-left:90px;
+}
+.r .content p{
+		
+		margin-left:-20px;
+		padding:60px;
+		width:300px;
+		height: 25px;
+		background-color: wihte;
+		color:green;
+		font-size: 30px;
+		font-family: cursive;
+		text-align: center;
+}
+
+.lightbox {
+	width: 800px;
+	height: 500px;
+	position: fixed;
+	top: 70px;
+	left: 400px;
+	border:2px solid black;
+	background: white;
+	filter: alpha(Opacity = 80);
+	-moz-opacity: 0.5;
+	opacity: 1;
+	z-index:999;
+	display: none;
+}
+
+.title{
+	float:left;
+	margin-left:250px;
+	color:white;
+	font-size: 20px;
+	font-family: cursive;
+	width: 240px;
+	height: 40px;
+	border:2px solid black;
+	background: #4d5e70;
+	text-align: center;
+}
+
+.imgs img{
+	float:left;
+	margin-left:260px;
+	width: 40px;
+	height: 35px;
+	
+}
+.lightbox input{
+	text-align: center;
+	border: 1px solid;
+	width:150px;
+}
+.lightbox label{
+	margin-top:10px;
+	margin-left:20px;
+	padding-right:10px;
+}
+.lightbox textarea {
+	margin-left:20px;
+	margin-top:10px;
+	padding-left:20px;
+}
+.lightbox .pics img{
+	margin-left:30px;
+	width:100px;
+	height: 100px;
+}
+
+	
+/*菜单配置框*/
+ #menu {
+	width: 800px;
+	height: 650px;
+	position: fixed;
+	top: 80px;
+	left: 653px;
+	border:2px solid black;
+	background: white;
+	filter: alpha(Opacity = 80);
+	-moz-opacity: 0.5;
+	opacity: 1;
+	z-index:999;
+	display: none;
+}
+#menu>span{
+	margin-left:87px;
+	font-size: 25px;
+}
+	
+.menutable  ul{
+	list-style: none
+}
+
+.menutable  ul li{
+	width:330px;
+	margin-left:20px;
+	height: 30px;
+}
+
+	 	

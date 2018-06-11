@@ -1,0 +1,217 @@
+@charset "utf-8";
+
+
+
+*{
+    margin: 0px;
+    border: 0px;
+}
+.c{
+    clear: both;
+}
+/*页面显示居中*/
+.inner {
+    width: 1224px;
+    margin: 0 auto;
+    /*background-color: red;*/
+}
+ .head{
+    width:1224px;
+    height: 104px;
+    background-color:WHITE;
+     border-bottom: 0.3PX solid lightgray;
+
+}
+
+ a:hover{
+
+     background: goldenrod;
+     border-radius: 7px;
+ }
+ .img1{
+     float: left;
+     margin-left: 71px;
+     width: 400px;
+     height: 104px;
+ }
+ .text1{
+     float: left;
+     margin-left: 50px;
+     text-align: center;
+     line-height:80px;
+    font-family: cursive;
+     font-size: 35px;
+     font-weight: 500;
+ }
+ .text2{
+     float: left;
+     line-height:80px;
+     margin-left: 270px;
+     font-family: cursive;
+     font-size: 25px;
+     font-weight: 500;
+     color: #999999;
+ }
+
+span{
+    font-size: 20px;
+    color: indigo;
+}
+.back{
+    float: left;
+    margin-left: 650px;
+    margin-top: -60px;
+}
+
+strong.em1{
+    color: gray;
+    font-family: cursive;
+    font-size: 17px;
+}
+
+ a{
+     text-decoration: none;
+     color: black;
+ }
+.d{
+    margin-top: 35px;
+}
+/*中间的块*/
+.meddile{
+    width: 1244px;
+    height: 348px;
+}
+
+/*中间左边的*/
+.ll{
+    float: left;
+    margin-left: 140px;
+    width: 280px;
+    height: 348px;
+    /*border: 1px solid gray;*/
+    border-radius: 5px;
+}
+.cell{
+
+    line-height:30px;
+    padding-left: 11px;
+    border-radius: 5px;
+    width:280px;
+    height: 34px;
+    border: 1px solid gray;
+    margin-top: 22px;
+    margin-left: 11px;
+}
+span.s{
+    margin-top: -5px;
+    margin-left:50px;
+    display: block;
+    color: red;
+    font-size: 20px;
+    font-family: cursive;
+}
+
+.cell1{
+
+    line-height: 10px;
+    padding-left: 11px;
+    border-radius: 7px;
+    width:280px;
+    height: 34px;
+    border: 1px solid gray;
+    margin-top: 22px;
+    margin-left: 11px;
+    text-align: center;
+    background-color: red;
+
+}
+.cell2{
+
+    margin-left: 25px;
+}
+.cell3{
+    line-height: 30px;
+    color: white;
+    background-color: red;
+}
+
+/*中间右边的*/
+.right{
+    float: left;
+    margin-left: 200px;
+    height:400px;
+    border: 1px solid gray;
+}
+
+/*中间最左边的*/
+.lastright{
+    float: left;
+    margin-left: 200px;
+    width: 309px;
+    height: 384px;
+}
+
+.rcell{
+    line-height:30px;
+    padding-left: 11px;
+    border-radius: 5px;
+    width:300px;
+    height: 34px;
+    margin-top: 100px;
+}
+/*图片旁边的文字*/
+.t{
+    padding-top: 10px;
+     margin-left: 20px;
+    margin-top: 50px;
+    text-align: center;
+    font-family: cursive;
+    font-size: 20px;
+    font-weight: 100;
+    line-height: 10px;
+    color: black;
+}
+
+
+.footer{
+    margin-top: 100px;
+    height: 118px;
+    padding:57px 0 57px 0;
+}
+
+.footer .nav ul {
+    position: absolute;
+    left:103px;
+    list-style: none;
+    color: gray;
+}
+input{
+    height:30px;
+    width:170px ;
+    text-align: left;
+
+}
+.footer .nav ul li {
+    float: left;
+    width: 100px;
+    border-right: 1px solid gray;
+}
+
+.footer .nav ul li a {
+    display: block;
+    width: 100px;
+    color: gray;
+    text-align: center;
+    text-decoration: none;
+    font-family: 微软雅黑;
+    font-size: 16px;
+}
+
+.footer p{
+    padding-top: 40px;
+    text-align: center;
+    font-family: 微软雅黑;
+    font-size: 16px;
+    color: gray;
+}
+

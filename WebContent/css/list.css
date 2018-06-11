@@ -1,0 +1,185 @@
+*{
+    margin:0px;
+    border:0px;
+}
+/*ҳ�����*/
+.inner{
+    width: 100%;
+    margin:0 auto;
+}
+.c{
+    clear:both;
+}
+.cache{
+    margin-top: 100px;
+    width: 100%;
+    height:200px ;
+    background-color: #666666;
+}
+a{
+    text-decoration: none;
+    color: black;
+}
+
+a:link{
+    color: black;
+}
+
+a:hover{
+    color: red;
+}
+
+/*����*/
+.index{
+    float:left;
+    width:20%;
+    height: auto;
+    border-bottom: 1px solid gray;
+    background: #999966;
+}
+
+.index p{
+    width:248px;
+    height: 36px;
+    text-align: left;
+    margin-left: 37px;
+    color: white;
+    background-color: #666666;
+    font-family: cursive;
+    font-size: 20px;
+    font-weight: bold;
+}
+.index ul{
+    list-style: none;
+
+}
+.index ul li{
+    border-bottom: 1px  dashed black;
+    margin-top: 17px;
+    width:auto;
+    height: 36px;
+    margin-left:20px;
+    color: white;
+    background-color: #999966;
+    font-family: cursive;
+    font-size: 25px;
+    font-weight: bold;
+    letter-spacing: 4px;
+}
+
+/*�б�*/
+.book{
+    float:left;
+    width: 79%;
+    height: 335px;
+    border:0px solid gray;
+    background-color:white ;
+}
+
+.book p{
+    margin-top: 10px;
+}
+
+/*ÿ����ĸ���*/
+.book  .cell{
+    float:left;
+    margin-top: 15px;
+    /*margin-left: 16px;*/
+    background-color:white ;
+    width:208px;
+    height: 264px;
+    position: relative;
+    border-right: 1px solid gray;
+}
+
+.book  .cell img{
+
+    width: 120px;
+    height: 140px;
+    padding: 15px 54px  32px 42px ;
+}
+
+
+.book  .cell  dd{
+    position:absolute;
+    top:181px;
+    font-family: cursive;
+    font-size: 20px;
+    font-weight: 300;
+    padding-left: 11px;
+}
+.book  .cell  dt{
+    position:absolute;
+    top:200px;
+    color: red;
+    padding-left: 11px;
+    font-family: fantasy;
+    font-size: 20px;
+    font-weight: 300;
+}
+.book  .cell del{
+    position:absolute;
+    left:53px;
+    top:205px;
+    /*padding-left: 50px;*/
+    color: gray;
+    font-family: fantasy;
+    ont-size: 14px;
+    font-weight: 300;
+}
+/*��ҳ*/
+.perecent{
+    margin-top: 130px;
+    margin-left: 34%;
+    width: 650px;
+    height: 50px;
+    background-color: white;
+}
+
+.perecent .cell{
+    float: left;
+    margin-left: 10px;
+    width:80px ;
+    height: 40px;
+    padding: 5px;
+    background-color: burlywood;
+    border-radius: 5px;
+
+}
+
+.perecent .cell em{
+
+    text-align: center;
+    padding: 18px 30px;
+    font-family: cursive;
+    font-weight: bold;
+    font-size: 30px;
+    color: darkred;
+}
+.load{
+	margin-top:100px;
+	margin-left:40%;
+	z-index:999;
+	position: absolute;
+	top:-40px;
+	left:-295px;
+
+}
+.load button{
+	font-weight:900;
+	font-size: 25px;
+	font-family: cursive;
+}
+
+.sss{
+	margin-left:32%;
+	height: 330px;
+	position: relative;
+	margin-top: 0px;
+
+}
+
+
+.perecent a:hover{
+    background-color: red;
+}

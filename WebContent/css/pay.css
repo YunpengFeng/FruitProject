@@ -1,0 +1,54 @@
+@charset "UTF-8";
+*{
+    
+    font-family: "微软雅黑";
+}
+.inner {
+    width: 1400px;
+    margin: 0 auto;
+
+}
+.top{
+	width:100%;
+	hegiht:auto;
+	margin-left:100px;
+	margin-top:20px;
+	border-bottom:0px inset gray;	
+}
+.meddile{
+	width:60%;
+	hegiht:auto;
+	margin-left:100px;
+	margin-top:20px;
+	border:1px inset #b2d1ff;
+}
+
+.behand{
+	width:100%;
+	hegiht:auto;
+	margin-left:100px;
+	margin-top:20px;
+	border:0px solid #b2d1ff;
+}
+
+.behand input{
+	 padding-left:60px;	
+	 border: 1px solid gray;
+	 margin-top: 5px; 
+	 width: 500px; 
+	 height: 40px;
+}
+
+.behand .ra{
+	 padding-left:60px;	
+	 border: 1px solid gray;
+	 margin-top: 5px; 
+	 width: auto; 
+	 height: auto;
+	 margin-left:20px;
+	 
+}
+.behand img{
+	width:120px;
+	height:60px;
+}

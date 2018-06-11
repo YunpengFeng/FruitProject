@@ -1,0 +1,464 @@
+*{
+    margin:0px;
+    border:0px;
+}
+/*不要算了，布局放不下*/
+ .inner{
+    width: 1300px;
+    margin:0 auto;
+} 
+
+.c{
+    clear:both;
+}
+.top{
+    width: 100%;
+    height: 47px;
+    background-color: #666666;
+}
+.top .head{
+    width: 213px;
+    height: 47px;
+    margin-left: 63px;
+    background-color:#990033 ;
+    font-family: cursive;
+    font-size: 30px;
+    font-weight: bold;
+    text-align: left;
+    color: white;
+
+}
+
+
+a{
+    text-decoration: none;
+    color: black;
+}
+
+a:link{
+    color: black;
+}
+
+a:hover{
+    color: red;
+}
+
+/*����Ҫ д���������б�Ĳ˵���js����*/
+.top #sel{
+    position:absolute;
+    margin-left: 63px;
+    margin-top: 0px;
+    width: 213px;
+    height: 470px;
+    background-color:red;
+    /*����div �ѵ�˳��*/
+    z-index:5;
+}
+
+
+/*����*/
+.top #sel .index{
+    border: 1px solid gray;
+    background: red;
+}
+
+.top #sel .index ul{
+    list-style: none;
+
+}
+
+.top #sel .index ul li{
+    border-bottom: 1px  dashed black;
+    margin-top: 17px;
+    width:150px;
+    height: 36px;
+    margin-left:20px;
+    color: white;
+    font-family: cursive;
+    font-size: 25px;
+    font-weight: bold;
+    letter-spacing: 4px;
+}
+
+.top #sel .index ul li a:hover{
+   background-color: white;
+}
+
+/*��ҳ*/
+.top .i{
+
+    margin-top: -40px;
+    margin-left: 320px;
+    background-color: #990033;
+    width: 130px;
+    height: 40px;
+    font-weight: bold;
+    letter-spacing: 10px;
+    color: black;
+    padding: 0px 5px;
+    text-align: center;
+    line-height:40px;
+    font-size: 30px;
+    font-family: cursive;
+
+}
+
+.show{
+
+    width: 1300px;
+    height: 640px;
+}
+
+.show .head em{
+    font-family: cursive;
+    font-size: 25px;
+    font-weight: bold;
+}
+.show .head{
+
+    width: 100%;
+    height: 45px;
+    background-color:white;;
+    padding-top:10px;
+    padding-left:63px ;
+}
+
+.show .body{
+	float:left;
+    margin-left:63px ;
+    width: 983px;
+    height: 550px;
+   background-color: white;
+   border: 1px solid rgba(0,0,0,.05);
+    border-right: 0px;
+}
+
+
+.show .body img{
+    float: left;
+    margin-top: 50px;
+    margin-left:33px ;
+    width: 270px;
+    height: 290px;
+
+}
+
+.show .body .text strong{
+    font-style: normal;
+    font-family: cursive;
+    font-size: 25px;
+    font-weight: bold;
+    color:black ;
+    letter-spacing: 2px;
+
+}
+
+.show .body .text p{
+    color: red;
+}
+.show .body .text{
+     float: left;
+    line-height: 40px;
+    margin-top: 40px;
+    margin-left:20px ;
+    width: 630px;
+    height: 300px;
+
+}
+
+
+.show .body .text .strong1{
+    font-style: normal;
+    font-family: cursive;
+    font-size: 25px;
+    font-weight: bold;
+    color:red ;
+    letter-spacing: 2px;
+    display:inline;
+
+}
+
+.show  .body  .images{
+    position: relative;
+    margin-top: 110px;
+    float: left;
+    margin-left: 10px;
+    width: 100px;
+    height: 100px;
+    border: 1px solid white;
+    border-radius:3px;
+}
+.show  .body  .images  img:hover{
+    border: 2px solid white;
+    width: 300px;
+    height: 200px;
+    z-index: 1;
+
+}
+
+.show  .body  .images img{
+    width: 80px;
+    height: 80px;
+    padding:10px;
+    position: absolute;
+    left: -60px;
+    top:-50px;
+}
+
+.show  .body  .oparetion{
+    margin-top: 110px;
+    float: left;
+    margin-left: 70px;
+    width: 200px;
+    height: 40px;
+    background-color: bisque;
+}
+.show  .body  .car{
+    margin-top: 110px;
+    float: left;
+    margin-left: 20px;
+    width: 120px;
+    height: 40px;
+    background:  url("../imgs/addcar.png")no-repeat;
+    border-radius:3px ;
+}
+/*聊天图标*/
+.show  .body .chart{
+	  float: right;
+    margin-right: 20px;
+}
+.show  .body  .chart  .chartimg{
+	 margin-top: 110px;
+    float: left;
+    margin-left: 10px;
+    width: 40px;
+    height: 40px;
+    border-radius:22px ;
+    font-family: cursive;
+}
+
+
+.show .left{
+	float:left;
+	margin-left:5px;
+	margin-top:0px;
+	width:240px;
+	height:auto;
+	border:1px solid gray ;
+	background-color:white;
+}
+/* .show .left .img{
+	margin-left
+} */
+.show .left ul{
+	list-style: none;
+}
+.show .left ul li{
+	margin-top:10px;
+		
+}
+.discuss{
+	width:1100px;
+	margin-left:70px;
+	height:auto;
+	background-color: white;
+/* 	border: 1px solid black;  */
+}
+/*无图100px，没图100px;*/
+.discuss .cell{
+	width:900px;
+	margin-left:10px;
+	height:115px;
+	background-color: white;
+	border-top: 1px dashed black; 
+	margin-top: 2px;
+}
+.discuss .cell .lefts{
+	float:left;
+	width:150px;
+	margin-left:10px;
+	height:100px;
+} 
+.discuss .cell .right{
+	float:left;
+	width:730px;
+	height:50px;
+	margin-left:10px;
+	height:100px;
+	background-color: white;
+} 
+
+.discuss .cell .right img{
+	float:left;
+	margin-left:15px;
+ 	width:94px;
+	height:53px; 
+}
+.discuss .cell .right  h1{
+	 font-style: normal;
+    font-family: cursive;
+    font-size: 15px;
+    font-weight: normal;
+    color:red ;
+    letter-spacing: 0px;
+}
+
+.discuss .cell .right  p{
+	float:left;
+	margin-top:10px;
+	color:black;
+	font-size: 20px;
+	display:inline;
+}
+
+.discuss .cell .right .stras{
+	float:left;
+	width:180px;
+	height:25px;
+	display:inline;
+	margin-top:10px;
+	background-color: white;
+}
+
+/*对话框*/
+.dalog{
+	position: fixed;
+	width:470px;
+	height:324px;
+	top: 270px;
+	right:1px;
+	z-index:999;
+	background-color:#bbE3Ef;
+	border:1px solid black;
+	display: inline;
+	display:none;
+	
+}
+
+.dalog .head{
+	width:100%;
+	height:28px;
+	margin-top:0px;
+	background-color:#bbE3Ef;
+	
+}
+.dalog .jilu{
+	float:left;
+	margin-top:5px;
+	width:330px;
+	height:210px;
+	background-color:white;
+	/* border-bottom: 1px solid black; */
+	/*  设置滚动条*/
+	overflow:scroll;
+}
+
+/*  对话记录显示位置*/
+.dalog .jilu .my{
+	margin-top:5px;
+	margin-left:3px;
+}
+.dalog .jilu .my .content{
+	float:left;
+	width:200px;
+	height:auto;
+	border-radius:5px;
+	background-color: #bbE3Ef;
+	margin-left:3px;
+	font-family: cursive;
+    font-size: 15px;
+    text-align: left;
+}
+.dalog .jilu .my img{
+	float:left;
+	margin-left:10px;
+	width:40px;
+	height:30px;
+}
+
+.dalog .jilu .he{
+	margin-top:5px;
+	margin-left:60px;
+}
+.dalog .jilu .he .content{
+	float:left;
+	 width:200px; 
+	height:auto;
+	border-radius:5px;
+	background-color: yellow;
+	font-family: cursive;
+    font-size: 15px;
+    text-align: left;
+}
+.dalog .jilu .he img{
+	float:left;
+	margin-left:10px;
+	width:40px;
+	height:30px;
+}
+
+
+
+.dalog .right{
+	float:left;
+	margin-top:5px;
+	width:130px;
+	height:210px;
+	background-color:white;
+	border: 1px solid black;
+}
+.dalog .right img{
+	margin-top:15px;
+	margin-left:15px;
+	width:100px;
+	height:130px;
+}
+.dalog .right p{
+	margin-left:15px;
+	text-align: center;
+	font-style: normal;
+    font-family: cursive;
+    font-size: 20px;
+	
+}
+.dalog .conversation{
+	float:left;
+	margin-top:5px;
+	width:78%;
+	height:70px;
+	background-color:white;
+}
+.dalog .conversation textarea{
+	width:100%;
+	height:89%;
+	margin-left:15px;
+	text-align: left;
+	font-style: normal;
+    font-family: cursive;
+    font-size: 20px;
+}
+
+
+.dalog  .send a{
+	float:left;
+	margin-top:0px;
+	margin-left:20px;
+	width:15%;
+	height:26px;
+	background-color:#E5effe;
+	font-style: normal;
+    font-family: cursive;
+    font-size: 20px;
+    text-align:center;
+    font-weight: bold;
+    color:black ;
+    border-radius:6px;
+    letter-spacing: 3px;
+}
+
+.discuss .cell .right img:hover{
+    border: 2px solid red;
+    width: 300px;
+    height: 150px;
+    z-index: 1;
+}
