@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	 <!-- 加载映射文件
+    <mappers>
+    	<mapper resource ="mapper/TeacherMapper.xml"/>
+    	批量加载mapper 
+    	制定mapper 接口的包名，mybatis自动扫描所有的mapper接口进行加载
+    	，遵循的规范：将mapper接口的类名和mapper.xml映射文件名称保持一致，
+    	且在同一目录下，上边的规范前提是：使用mapper代理方法
+   	<package name ="com.feng.mapper.TeacherMapper"/>
+    </mappers>-->
+    <settings>
+		<setting name="logImpl" value="LOG4J"/>
+    </settings>
+  
+	 <!-- 单个别名定义
+          <typeAliases>
+        	<package typeAliases="com.feng.bean.Teacher " alias=teacher/>
+    	</typeAliases>-->
+    <!-- 批量别名定义
+    指定包名，mybatis自动扫描保重的po类，自动定义别名
+    别名就是类名（首字母大小写都可以）-->    
+    <typeAliases>
+        <package name="com.nchu.fruit.pojo"/>
+    </typeAliases>
+    
+   
+    
+</configuration>

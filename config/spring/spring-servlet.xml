@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans  xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:context="http://www.springframework.org/schema/context"  
+    xmlns:mvc="http://www.springframework.org/schema/mvc"  
+    xsi:schemaLocation="http://www.springframework.org/schema/beans 
+    http://www.springframework.org/schema/beans/spring-beans.xsd 
+    http://www.springframework.org/schema/context
+    http://www.springframework.org/schema/context/spring-context.xsd
+    http://www.springframework.org/schema/mvc
+    http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+ 
+ 	<!-- 加载dp.properties文件-->
+  <context:property-placeholder location="classpath:dp.properties"/>
+	  <!-- 启动缓存 -->
+	  <!-- <bean class="com.nchu.fruit.utils.InitDataListener"></bean> -->
+      <!-- apache.dbcp连接池的配置-->  
+    <bean id="dataSource"  
+        class="org.apache.commons.dbcp.BasicDataSource"  
+        destroy-method="close">  
+        		<property name="driverClassName" value="${jdbc.driverClassName}" />
+                <property name="url" value="${jdbc.url}" />
+                <property name="username" value="${jdbc.user}" />
+                <property name="password" value="${jdbc.password}" />  
+                 <property name="maxActive" value="100"></property>  
+        		<property name="maxIdle" value="30"></property>  
+      		  <property name="maxWait" value="500"></property>   
+        <property name="defaultAutoCommit" value="true"></property>  
+    </bean>  
+  
+  <!--  配置sqlSeesionFactory，下面两个属性很重要-->
+ <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+ <!-- 数据库连接库 加载mybatis的配置文件-->
+ <property name="dataSource" ref="dataSource"></property>
+ <property name="configLocation" value="classpath:mybatis/sqlMapperConfig.xml"></property>
+ </bean>
+  
+  <!--  mapper 扫描器, 批量加载mapper
+    	制定mapper 接口的包名，mybatis自动扫描所有的mapper接口进行加载
+    	，遵循的规范：将mapper接口的类名和mapper.xml映射文件名称保持一致，
+    	且在同一目录下，上边的规范前提是：使用mapper代理方法-->
+ <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+  <!--有多个包要扫描用半角的逗号隔开-->
+ <property name="basePackage" value="com.nchu.fruit.mapper"></property>
+ <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"></property>
+ </bean>
+ 
+    <!-- 自动扫描的包名，前端控制器将在指定的包中查找controller -->
+    <context:component-scan base-package="com.nchu.fruit.*" />
+
+    <!-- 支持MVC注解映射 -->
+   <!--  <mvc:annotation-driven /> -->
+    <context:annotation-config />
+	<bean class="org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor"/>
+	
+    <!-- 设定视图解释类 ,
+    DispatcherServlet会加载所有的viewResolver到一个list中，并按照优先级进行解析。
+	注意：①order中的值越小，优先级越高。-->
+	
+	
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+      <property name="prefix" value="WEB-INF/Jsp/"/> <!-- view的路径  -->
+    <property name="suffix" value=".jsp"/>  <!-- view的后缀  -->    
+       <property name="order" value="0" />  
+    </bean>
+    
+     <!-- <bean id="htmlviewResolver"    
+        class="org.springframework.web.servlet.view.InternalResourceViewResolver">   
+        <property name="viewClass" value="com.nchu.fruit.utils.HtmlResourceView"/>  
+        <property name="order" value="1" />  
+        <property name="prefix" value="WEB-INF/Jsp"/>  
+        <property name="suffix" value=".html" />    
+        <property name="contentType" value="text/html;charset=UTF-8"></property>    
+    </bean>   -->
+
+    <!-- 访问以下静态资源时不需要经过前端控制器DispatcherServlet --> 
+       <mvc:resources mapping="/imgs/**" location="imgs/"  />       
+       <mvc:resources mapping="/temp/**" location="file:D:\ImprotantPictures\temp\" />                                         
+     <mvc:resources mapping="/comImages/**" location="file:D:\ImprotantPictures\commentPictures\" />  
+     <mvc:resources mapping="/fruitImages/**" location="file:D:\ImprotantPictures\fruitImages\" />  
+       <mvc:resources mapping="/JSresources/**" location="/JSresources/"  /> 
+      <mvc:resources mapping="/css/**" location="/css/" /> 
+    
+    <mvc:default-servlet-handler />
+    
+        <!-- 文件上传解析器 -->  
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">  
+        <property name="defaultEncoding" value="utf-8"></property>  
+        <property name="maxUploadSize" value="10485760000"></property><!-- 最大上传文件大小 -->  
+        <property name="maxInMemorySize" value="10960"></property>  
+    </bean>  
+    <!-- 配置返回数据的多样性 -->
+      <mvc:annotation-driven>
+        <mvc:message-converters>
+            <ref bean="stringHttpMessageConverter"/>
+            <ref bean="mappingJackson2HttpMessageConverter"/>
+        </mvc:message-converters>
+    </mvc:annotation-driven>
+
+    <bean id="stringHttpMessageConverter"
+          class="org.springframework.http.converter.StringHttpMessageConverter"/>
+
+    <!--解决IE浏览器json文件下载和json数据中乱码的问题-->
+    <bean id="mappingJackson2HttpMessageConverter"
+          class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+        <property name="supportedMediaTypes">
+            <list>
+                <value>text/html;charset=UTF-8</value>
+            </list>
+        </property>
+    </bean>
+<!--end:使用Jackson 2.x的配置，需要导入的jar包：jackson-core-xxx.jar、jackson-annotations-xxx.jar、jackson-databind-xxx.jar-->
+      <!-- 防止用户根据链接地址进入未登录的页面操作 -->
+      
+<!-- 配置拦截器 -->
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <mvc:mapping path="/**"/>
+            <bean class="com.nchu.fruit.utils.MyInterceptor">
+                <!--白名单-->
+                <property name="whitePath">
+                    <list>
+                      <value>/manager</value>
+	                     <value>/topay</value>
+	                     <value>/info</value>
+                   		 <value>/addcar</value>
+                    	 <value>/shopping</value>
+                    </list>
+                </property>
+              </bean>
+        </mvc:interceptor>
+    </mvc:interceptors>
+      
+</beans>
